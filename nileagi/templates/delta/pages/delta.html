@@ -1,0 +1,90 @@
+{% extends '../includes/base.html' %}
+{% load static %}
+{% block content %}
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <!-- <h1 class="text-center">Your Knowledge Friend!</h1> -->
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="card">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+
+          <div class="container-fluid d-flex flex-column min-vh-100">
+            <div class="row flex-grow-1">
+
+              <!-- Reports -->
+              <div class="col-12" style="overflow-y: auto; max-height: 80vh;">
+                <!-- <div class="card"> -->
+
+                  <div class="card-body">
+                    <!-- <h5 class="card-title">What to Ask?</h5> -->
+
+                    <div class="row">
+
+                      <!-- Default Card -->
+                      <div class="content">
+                        <div class="card-body">
+                          <h5 class="card-title" id="queryText"></h5>
+                          <p id="responseText"></p>
+                        </div>
+                      </div><!-- End Default Card -->
+
+                      <!-- Card with an image on left -->
+                      <div class="mb-3" class="image-response">
+                        <div class="row g-0">
+                          <div class="col-md-4" id="image-preview">
+
+                          </div>
+                          <div class="col-md-8">
+                            <div class="card-body">
+                              <h5 class="card-title" id="queryImage"></h5>
+                              <p class="card-text" id="responseImage"></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div><!-- End Card with an image on left -->
+
+                    </div>
+
+                  </div>
+
+                <!-- </div> -->
+              </div><!-- End Reports -->
+
+            </div>
+          </div>
+        </div><!-- End Left side columns -->
+
+      </div>
+    </div>
+    </section>
+
+    <!-- Fixed-bottom input form -->
+    <form method="POST" class="fixed-bottom mb-3" id="inputForm">
+      {% csrf_token %}
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2"></div><!-- Empty column for spacing -->
+          <div class="col-md-10">
+            <div class="input-group">
+              <label for="fileInput" class="form-check-label input-group-text">
+                <i class="bi bi-plus"></i>
+                <input type="file" class="form-check-input mt-0" id="fileInput" style="display: none;">
+              </label>
+              <input type="text" class="form-control" placeholder="Ask Delta..." aria-label="Ask Rafiki..." id="textInput">
+              <button class="input-group-text" id="submitBtn"> <i class="bi bi-arrow-up-short"></i></button>
+            </div>
+            <br>
+            <!-- <p class="text-center">Delta may make mistakes, please don't rely on its information.</p> -->
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </main><!-- End #main -->
+{% endblock %}

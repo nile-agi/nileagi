@@ -1,0 +1,37 @@
+{% extends 'includes/master.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Subscription</h2>
+          <ol>
+            <li><a href="{% url 'about-opticai'%}">NileAGI</a></li>
+            <li>Subscribe</li>
+          </ol>
+        </div>
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="row mt-5 justify-content-center" data-aos="fade-up">
+          <div class="col-lg-10">
+              <div class="row">
+              </div>
+              <div class="my-3">
+                <div class="sent-message well">
+                    {% if success_msg %}
+                    <p class="text-success text-center">{{ success_msg }}</p>
+                    {% endif %}
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Contact Section -->
+  </main><!-- End #main -->
+{% endblock %}

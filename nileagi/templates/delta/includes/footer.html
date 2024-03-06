@@ -1,0 +1,226 @@
+{% load static %}
+
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'delta/assets/vendor/jquery/jquery-1.12.4.js' %}"></script>
+  <script src="{% static 'delta/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'delta/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'delta/assets/vendor/chart.js/chart.umd.js' %}"></script>
+  <script src="{% static 'delta/assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'delta/assets/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'delta/assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'delta/assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'delta/assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'delta/assets/js/main.js' %}"></script>
+
+</body>
+
+</html>
+
+<script>
+
+$(document).ready(function () {
+
+// Function to validate file size
+function validateFileSize(file) {
+  // Maximum file size allowed (50MB)
+  var maxSize = 50 * 1024 * 1024; // 50MB in bytes
+  if (file.size > maxSize) {
+      // alert("File size exceeds the maximum limit of 50MB.");
+      return false;
+  }
+  return true;
+}
+
+$('#fileInput').change(function(){
+
+    var imageInput = document.getElementById("fileInput");
+
+  var file = imageInput.files[0];
+  if (file) {
+      if (validateFileSize(file)) {
+          
+          var reader = new FileReader();
+
+          // Get the file extension
+          var fileExtension = file.name.split('.').pop().toLowerCase();
+
+          // Check if the file extension corresponds to an image
+          var isImage = ['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension);
+
+          var responseItemHTML = `
+                    <div class="mb-3" class="image-response">
+                        <div class="row g-0">
+                          <div class="col-md-4" class="image-preview">
+
+                          </div>
+                          <div class="col-md-8">
+                            <div class="card-body">
+                              <h5 class="card-title" id="queryImage"></h5>
+                              <p class="card-text" id="responseImage"></p>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    `;
+
+                    // Append the response item to the main content div
+            $('.image-response:last').append(responseItemHTML);
+
+            var imagePreview = document.getElementById("image-preview");
+
+          if (isImage) {
+              reader.onload = function (e) {
+                   imagePreview.innerHTML = '<img src="' + e.target.result + '" alt="File Preview" width="500px" height="500px" class="img-fluid responsive img-thumbnail">';
+              };
+          } else {
+              // Display a generic file icon for non-image files
+              reader.onload = function (e) {
+                  imagePreview.innerHTML = '<div class="file-icon-container"><i class="fa fa-file-o fa-5x" aria-hidden="true"></i></div>';
+              };
+          }
+
+
+          reader.readAsDataURL(file);
+          
+      } else {
+          // toastr.error("File size exceeds the maximum limit of 50MB",'Error', {
+          //     closeButton: true,
+          //     progressBar: true,
+          //     positionClass: 'toast-top-center',
+          //     timeOut: 3000,
+          // });
+
+          // $('.toast-error').css('background-color', '#ff0000');
+          // return false
+          alert("File size exceeds the maximum limit of 50MB.");
+          return false
+      }
+  }
+
+
+});
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
+$('#textInput').on('keydown', function (e) {
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        $('#submitBtn').click();
+    }
+});
+
+
+$('#submitBtn').click(function () {
+    $('#submitBtn').prop('disabled', true);
+    $('#textInput').focus();
+
+    var textInput = $('#textInput').val().trim();
+    var fileInput = document.getElementById("fileInput").files[0];
+
+    $('#textInput').val('');
+
+    if (textInput === '' && !fileInput) {
+        alert('Please enter text or choose a file.');
+        $('#submitBtn').prop('disabled', false);
+        return false;
+    } else if (textInput === '' && fileInput) {
+        alert('Please enter text along with the image.');
+        $('#submitBtn').prop('disabled', false);
+        return false;
+    }
+    else{
+        if(fileInput){
+            $("#queryImage").text(textInput);
+        }
+    console.log('Text Input:', textInput);
+    // alert('File Input:', fileInput);
+
+    var formData = new FormData();
+    formData.append('prompt', textInput);
+    formData.append('file', fileInput);
+
+    // Get CSRF token
+    var csrftoken = getCookie('csrftoken');
+    console.log('CSRF Token:', csrftoken);
+
+    // Perform Ajax request
+    $.ajax({
+        type: 'POST',
+        url: "{% url 'delta:search' %}",
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        headers: {
+            "X-CSRFToken": csrftoken
+        },
+        success: function (response) {
+            console.log('Ajax Success:', response);
+            $('#submitBtn').prop('disabled', false);
+
+            if (response.success) {
+                if(response.image){
+                  $("#responseImage").text(response.output);
+                }
+                else{
+            // Create HTML for each response item
+                    var responseItemHTML = `
+                        <div class="content">
+                            <div class="card-body">
+                                <h5 class="card-title" id="queryText">${response.query}</h5>
+                                <p id="responseText">${response.output}</p>
+                            </div>
+                        </div><!-- End response item-->
+                    `;
+
+                    // Append the response item to the main content div
+                    $('.content:last').append(responseItemHTML);
+              }
+
+            } else {
+                console.error('Ajax request error:', response.message);
+            }
+        },
+        error: function (error) {
+            console.error('Ajax request error:', error);
+            $('#textInput').prop('disabled', false);
+            $('#submitBtn').prop('disabled', false);
+        }
+    });
+  }
+});
+
+
+
+
+
+
+
+
+});
+
+
+
+</script>
+
+</body>
+
+</html>

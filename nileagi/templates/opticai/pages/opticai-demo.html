@@ -1,0 +1,193 @@
+{% extends 'system/includes/master.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% load static %}
+<head>
+<link rel="stylesheet" href="{% static 'system/public/assets/css/style_opticai.css' %}">
+</head>
+
+<main>
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+  
+          <div class="d-flex justify-content-between align-items-center">
+            <h2>OpticAI Demo </h2>
+            <ol>
+            <li><a href="{% static 'system/public/assets/img/samples.zip' %}">Download sample eyes images</a></li>
+            </ol>
+          </div>
+  
+        </div>
+      </section><!-- End Breadcrumbs -->
+        <section id="main">
+            <div class="container" style="padding: 0; margin-top: 100px;">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12 align-items-center" id='results_side'>
+                        <form  class="form align-items-center" action="" id='form_img_section_one' enctype="multipart/form-data" method="POST">
+                            {% csrf_token %}
+                            <div class="file-drop-area align-items-center">
+                                <!-- <span class="choose-file-button align-items-center" >OPEN AN EYE IMAGE</span> -->
+                                {{ image_horizontal.image_file }}
+                                <span id="val"></span>
+                            </div>
+                        </form>
+                        {% if image.filepaths.url %}
+                        <div class="panel panel-primary" style="margin-top:100px;">
+                            <hr>
+                            <div class="">
+                                <img width="400px" height="300px"class="img-responsive img-circle" src="{{ image.filepaths.url }}" alt="{{ image_path }}">
+    
+                               </div>
+                            <hr>
+                            <div class="panel-heading">
+                                <p class="panel-title">IMAGE DETAILS</p>
+                            </div>
+                            <div class="panel-body">
+                                <div>
+                                    <hr>
+                                    <p>Image Name: {{ image_name }}</p>
+                                    <hr>
+                                    <p>Image ID: {{ image_id }}</p>
+                                    <hr>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <!-- <br><br> -->
+                    <div class="col-md-6 col-sm-12 col-xs-12 flex-d align-items-center" id='form-round-side'>
+                                <canvas id="myChart_classes" style="width:100%;max-width:500px; height:200px;"></canvas>
+                                <br>
+                                {% if image.filepaths.url %}
+                                <hr>
+                                {% endif %}
+                                <br>
+                                <canvas id="myChart_proba" style="width:100%;max-width:500px;"></canvas>
+                                {% if image.filepaths.url %}
+                                <hr>
+                                {% endif %}
+                                <script>
+        
+                                    var pred_index = {{ pred_index }};
+                                    var probabilities = {{ probabilities }};
+                                    var proba = {{ proba }};
+        
+                                    //class prediction
+        
+                                    if(pred_index == 0){
+                                      var indeces = [probabilities[0]];
+                                      var grade_names = ["Grade 0"];
+                                      var barColors = ["green"];
+                                    }
+                                    else if(pred_index == 1){
+                                      var indeces = [probabilities[1]];
+                                      var grade_names = ["Grade 1"];
+                                      var barColors = ["yellow"];
+                                    }
+                                    else if(pred_index == 2){
+                                      var indeces = [probabilities[2]];
+                                      var grade_names = ["Grade 2"];
+                                      var barColors = ["orange"];
+                                    }
+                                    else if(pred_index == 3){
+                                       var indeces = [probabilities[3]];
+                                       var grade_names = ["Grade 3"];
+                                       var barColors = ["red"];
+                                    }
+                                    else if(pred_index == 4){
+                                       var indeces = [probabilities[4]];
+                                       var grade_names = ["Grade 4"];
+                                       var barColors = ["brown"];
+                                    }
+        
+                                    new Chart("myChart_classes", {
+                                    type: 'horizontalBar',
+                                    data: {
+                                        labels: grade_names,
+                                        datasets: [{
+                                        backgroundColor: barColors,
+                                        data: indeces
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            xAxes: [{
+                                                ticks: {
+                                                    min: 0,
+                                                    max: 1,
+                                                    fontSize: 15
+                                                }
+                                            }],
+                                            yAxes: [{
+                                                ticks: {
+                                                    fontSize: 15
+                                                },
+                                                stacked: true,
+                                                barPercentage: 0.4
+                                            }]
+                                        },
+                                        maintainAspectRatio: false,
+                                        responsive: false,
+                                        grid: {display:false},
+                                        legend: {display: false},
+                                        title: {
+                                        fontSize: 15,
+                                        display: true,
+                                        text: "Diabetic Retinopthy Grade Predicted"
+                                        }
+                                    }
+                                    });
+        
+                                    //probabilities
+        
+                                    var grade_names = ["Grade 0", "Grade 1", "Grage 2", "Grade 3", "Grade 4"];
+                                    var probas = [probabilities[0],probabilities[1], probabilities[2], probabilities[3], probabilities[4]];
+                                    var barColors = ["green", "yellow","orange","red","brown"];
+        
+                                    new Chart("myChart_proba", {
+                                    type: "bar",
+                                    data: {
+                                        labels: grade_names,
+                                        datasets: [{
+                                        backgroundColor: barColors,
+                                        data: probas
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    min: 0,
+                                                    max: 1,
+                                                    fontSize: 15
+                                                }
+                                            }],
+                                            xAxes: [{
+                                                ticks: {
+                                                    fontSize: 15
+                                                },
+                                                stacked: true,
+                                                categoryPercentage: 0.6,
+                                            }]
+                                        },
+                                        legend: {display: false},
+                                        title: {
+                                        display: true,
+                                        fontSize: 15,
+                                        text: "Diabetic Retinopthy Grades"
+                                        }
+                                    }
+                                    });
+        
+        
+        
+                                </script>
+        
+                    </div>
+
+            </div>
+        </section>
+</main>
+{% endblock %}

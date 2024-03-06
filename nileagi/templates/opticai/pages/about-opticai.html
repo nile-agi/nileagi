@@ -1,0 +1,250 @@
+{% extends 'system/includes/master.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% load static %}
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>OpticAI</h2>
+          <ol>
+          <li><a href="{% url 'home:home'%}">Home</a></li>
+            <li><a href="{% url 'home:blog' %}">Blog</a></li>
+            <li>OpticAI</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Single Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img src="{% static 'system/public/assets/img/blog/opticai-intro.png' %}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="{% url 'opticai:about-opticai' %}">AI that can predict blindness!</a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <!-- <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">NileAGI</a></li> -->
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{% url 'opticai:about-opticai' %}"><time datetime="2022-05-04">May 04, 2022</time></a></li>
+                  <!-- <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li> -->
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p>
+                People with diabetes face different challenges, as diabetes comes with many complications which make their life complicated and hard.
+                Diabetes(Diabetes Mellitus) is the group of desires that affect how our bodies controls/ uses blood sugar/ glucose.<br>
+                Among the complications that come with diabetes are cardiovascular disease, nerve damage, kidney damage, skin condition, foot damage, hearing impairments, depression, Alzheimer’s disease, diabetic retinopathy and many more.
+                </p>
+
+                <div class="" style="text-align:center;">
+               <img src="{% static 'system/public/assets/img/blog/diabetes.png' %}" class="img-fluid"  alt="">
+               </div>
+               <p style="text-align:center;">credit:<a href="https://www.endocrine.org/patient-engagement/endocrine-library/diabetes-complications"> www.endocrine.org</a> </p>
+
+                <blockquote>
+                <p>
+                Diabetic retinopathy is a complication of diabetes, caused by high blood sugar levels damaging the back of the eye (retina). It can cause blindness if left undiagnosed and untreated.
+                (<a href="https://www.nhs.uk/conditions/diabetic-retinopathy/">source</a>)
+                </p>
+                </blockquote>
+
+                <p>
+                Diabetic retinopathy can occur without symptoms and can cause vision problems that can not be corrected by a lens and can even cause blindness at the late stage,
+                 but also is curable at its early stages/ (<a href="#">proliferative</a>). So people with diabetes needed to take a regular screening of there eyes to access the development of the disease.
+                </p>
+                <div class="" style="text-align:center;">
+               <img src="{% static 'system/public/assets/img/blog/screening.webp' %}" class="img-fluid"  alt="">
+               </div>
+               <p style="text-align:center;">credit:<a href="https://www.devex.com/news/as-diabetes-increases-in-sub-saharan-africa-so-will-blindness-97941">Devex</a> </p>
+                
+
+                <h3>Statistics on Diabetic Retinopathy</h3>
+                <p>
+                According to <a href="https://www.who.int/health-topics/diabetes#tab=tab_1">WHO</a>, about 422 million people on the earth have diabetes, in sub-Sahara Africa about 41 million people will be suffering from diabetes by 2045,
+                 which will increase the people in risk of Diabetic Retinopathy(<a href="https://www.researchgate.net/figure/Number-of-people-with-diabetes-worldwide-and-per-region-in-2017-and-2045-with_fig1_331500286">source</a>).
+                </p>
+                <div class="" style="text-align:center;">
+               <img src="{% static 'system/public/assets/img/blog/stats.png' %}" class="img-fluid"  alt="">
+               </div>
+                <p>As the number of people with diabetes increases, also the number of people with diabetic retinopathy increases as well as the number of patients that need regular screening increases, on the other hand the problem of shortage of doctors for performing screening arises.
+                    Also is on the very limited number of ophthalmologists example for Tanzania alone there are <b>0.8:1 million</b> ophthalmologists per Tanzania population ratio according to <a href="http://www.ccbrt.or.tz/programmes/disability/eye/">CCBRT</a>  so if there is another way to screen the diabetic retinopathy it may help a lot.</p>
+
+                <h3>Meet <a href="#">OpticAI</a></h3><br>
+                <p>
+                <b>Can we use AI to help?</b> <br>
+                AI that could solve the issue of doctors shortage. We have used the same kind of Machine Learning model that helps us organize our photos or tag our friends on social media, namely, image recognition.
+                </p>
+                <p>
+                In Image recognition, model is trained using tagged/labelled images, after looking for thousand of examples the model learns to identify the new images without any human help.
+                For this Retinopathy project, we used retina fundus images which are graded by doctors on a scale of 1 to 5 which is healthy to decrease, These images are then used to train the Machine Learning algorithm, Overtime the model will learn to predict an eye image that shows the sign of disease. 
+                </p>
+                <p>
+                The complete of this system will speed up the diagnosis process and augment the clinical care as a result we can prevent blindness.
+                </p>
+                  <blockquote>
+                  <p>
+                  OpticAI is an intelligent tool built by NileAGI for Diabetic Retinopathy diagnosis to help millions of people from blindness by making early detection.
+                  </p>
+                </blockquote>
+                </p>
+                <h3>How it works?</h3>
+                <p>
+                The doctors will be taking the pictures of the patient's back part of the eye, one for the left eye and one for the right eye, and then the images are uploaded to the system, 
+                and then the model in the system will perform an analysis and send the results back to the system interface along with the referral recommendation including further procedures.
+                </p>
+                <p>
+                Currently, the diagnosis takes months, where it becomes hard to erlier detect the blindness possibilities. With the help of this technology the process will be fast within few seconds and patients can get early treatment.
+                Routine eye exam can spot the problem early in a rural or remote areas thus this AI system can step in and be that early detection system.
+                </p>
+               <div class="" style="text-align:center;">
+               <img src="{% static 'system/public/assets/img/blog/opticai.gif' %}" class="img-fluid"  alt="">
+               </div>
+               <p style="text-align:center;"><a href="#">OpticAI Demo</a></p>
+              <blockquote>
+                  <p>
+                  With the current context where there is doctors scarcity, <a>OpticAI</a> can help to make the diagnosis faster and reliable.
+                  </p>
+                </blockquote>
+              </div>
+              <a class="btn btn-outline-danger pull-right center" href="{% url 'opticai:opticai' %}">Try OpticAI</a>
+              <br><br>
+              <div class="entry-footer">
+                <i class="bi bi-folder"></i>
+                <ul class="cats">
+                  <li><a href="#">agi</a></li>
+                </ul>
+
+                <i class="bi bi-tags"></i>
+                <ul class="tags">
+                  <li><a href="#">usefulai</a></li>
+                  <li><a href="#">agi</a></li>
+                  <li><a href="#">health</a></li>
+                </ul>
+              </div>
+
+            </article><!-- End blog entry -->
+
+            <div class="blog-author d-flex align-items-center">
+              <img src="{% static 'system/public/assets/img/blog/nileagi.jpg' %}" class="rounded-circle float-left" alt="">
+              <div>
+                <!-- <h4>NileAGI</h4> -->
+                <div class="social-links">
+                  <a href="https://twitter.com/NileAGI"><i class="bi bi-twitter"></i></a>
+                  <a href="https://www.linkedin.com/company/nile-agi"><i class="bi bi-linkedin"></i></a>
+                  <a href="https://www.instagram.com/nile.agi/"><i class="biu bi-instagram"></i></a>
+                </div>
+                <p>
+                  NileAGI
+                </p>
+              </div>
+            </div><!-- End blog author bio -->
+
+          </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+
+            <div class="sidebar">
+
+              <!-- <h3 class="sidebar-title">Search</h3>
+              <div class="sidebar-item search-form">
+                <form action="">
+                  <input type="text">
+                  <button type="submit"><i class="bi bi-search"></i></button>
+                </form>
+              </div> -->
+              <!-- End sidebar search formn-->
+
+              <h3 class="sidebar-title">Categories</h3>
+              <div class="sidebar-item categories">
+                <ul>
+                  <li><a href="#">Reseach <span>(1)</span></a></li>
+                  <li><a href="#">Natural Language Processing <span>(0)</span></a></li>
+                  <li><a href="#">Computer Vision <span>(0)</span></a></li>
+                  <!-- <li><a href="#">Design <span>(22)</span></a></li>
+                  <li><a href="#">Creative <span>(8)</span></a></li>
+                  <li><a href="#">Educaion <span>(14)</span></a></li> -->
+                </ul>
+              </div><!-- End sidebar categories-->
+
+              <!-- <h3 class="sidebar-title">Recent Posts</h3>
+              <div class="sidebar-item recent-posts">
+                <div class="post-item clearfix">
+                  <img src="public/assets/img/blog/blog-recent-1.jpg" alt="">
+                  <h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
+                  <time datetime="2020-01-01">Jan 1, 2020</time>
+                </div>
+
+                <div class="post-item clearfix">
+                  <img src="public/assets/img/blog/blog-recent-2.jpg" alt="">
+                  <h4><a href="blog-single.html">Quidem autem et impedit</a></h4>
+                  <time datetime="2020-01-01">Jan 1, 2020</time>
+                </div>
+
+                <div class="post-item clearfix">
+                  <img src="public/assets/img/blog/blog-recent-3.jpg" alt="">
+                  <h4><a href="blog-single.html">Id quia et et ut maxime similique occaecati ut</a></h4>
+                  <time datetime="2020-01-01">Jan 1, 2020</time>
+                </div>
+
+                <div class="post-item clearfix">
+                  <img src="public/assets/img/blog/blog-recent-4.jpg" alt="">
+                  <h4><a href="blog-single.html">Laborum corporis quo dara net para</a></h4>
+                  <time datetime="2020-01-01">Jan 1, 2020</time>
+                </div>
+
+                <div class="post-item clearfix">
+                  <img src="public/assets/img/blog/blog-recent-5.jpg" alt="">
+                  <h4><a href="blog-single.html">Et dolores corrupti quae illo quod dolor</a></h4>
+                  <time datetime="2020-01-01">Jan 1, 2020</time>
+                </div>
+
+              </div> -->
+              <!-- End sidebar recent posts-->
+
+              <h3 class="sidebar-title">Tags</h3>
+              <div class="sidebar-item tags">
+                <ul>
+                  <li><a href="#">usefulai</a></li>
+                  <li><a href="#">healthcare</a></li>
+                  <li><a href="#">blindness</a></li>
+                  <li><a href="#">opticai</a></li>
+                  <!-- <li><a href="#">Design</a></li>
+                  <li><a href="#">Office</a></li>
+                  <li><a href="#">Creative</a></li>
+                  <li><a href="#">Studio</a></li>
+                  <li><a href="#">Smart</a></li>
+                  <li><a href="#">Tips</a></li>
+                  <li><a href="#">Marketing</a></li> -->
+                  
+                </ul>
+
+              </div><!-- End sidebar tags-->
+
+            </div><!-- End sidebar -->
+
+          </div><!-- End blog sidebar -->
+
+        </div>
+
+      </div>
+    </section><!-- End Blog Single Section -->
+
+  </main><!-- End #main -->
+{% endblock %}

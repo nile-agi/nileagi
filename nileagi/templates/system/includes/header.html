@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>NileAGI</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'system/public/assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'system/public/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'system/public/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'system/public/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'system/public/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'system/public/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'system/public/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'system/public/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'system/public/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'system/public/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="{% static 'system/public/assets/css/style.css' %}" rel="stylesheet">
+
+
+  <!-- =======================================================
+  * Template Name: Company - v4.7.0
+  * Template URL: https://bootstrapmade.com/company-free-html-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  {% block title %}{% endblock %}
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo me-auto"><a href="{% url 'home:home' %}">Nile<span>AGI</span></a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.php?q=home" class="logo me-auto me-lg-0"><img src="public/assets/img/logo/logo.png" alt="" class="img-fluid"></a> -->
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a href="{% url 'home:home' %}" class="active">Home</a></li>
+          <li><a href="{% url 'home:about' %}">About</a></li>
+          <li><a href="{% url 'home:services_products' %}">Services & Products</a></li>
+          <!-- <li><a href="index.php?q=research">Research</a></li> -->
+          <!-- <li><a href="index.php?q=publications">Publications</a></li> -->
+          <!-- <li><a href="index.php?q=tools">Tools</a></li> -->
+          <!-- <li><a href="pricing.html">Pricing</a></li> -->
+          <li><a href="{% url 'home:blog' %}">Blog</a></li>
+          <li><a href="{% url 'home:contact' %}">Contact</a></li>
+
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+      <div class="header-social-links d-flex">
+        <a href="https://twitter.com/NileAGI" class="twitter"><i class="bu bi-twitter"></i></a>
+        <!-- <a href="#" class="facebook"><i class="bu bi-facebook"></i></a> -->
+        <a href="https://www.instagram.com/nile.agi/" class="instagram"><i class="bu bi-instagram"></i></a>
+        <a href="https://www.linkedin.com/company/nile-agi" class="linkedin"><i class="bu bi-linkedin"></i></i></a>
+      </div>
+
+    </div>
+  </header><!-- End Header -->
